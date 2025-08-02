@@ -38,7 +38,8 @@ public class RoomGenerator : MonoBehaviour
         }
 
         // สุ่ม rule ง่าย ๆ สองแบบ
-        bool useCategoryRule = Random.value > 0.5f;
+        bool useCategoryRule = Random.value >= 0.5f;
+        
 
         List<ItemData> mainGroup = null;
         ItemData oddItem = null;
