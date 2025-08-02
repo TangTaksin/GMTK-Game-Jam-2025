@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Dog
   m_EditorClassIdentifier: 
   itemName: Dog
-  icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  icon: {fileID: 799150636052528185, guid: ea9d026fb28862d41b260b1b09d9ad27, type: 3}
   category: 2
   weight: 5
