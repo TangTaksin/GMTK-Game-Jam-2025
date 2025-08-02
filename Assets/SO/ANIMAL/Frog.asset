@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Frog
   m_EditorClassIdentifier: 
   itemName: Frog
-  icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  icon: {fileID: 3719068211130651045, guid: 88a3ee3922ffdf24b92cc92cd4bab8e2, type: 3}
   category: 2
   weight: 2

@@ -51,8 +51,19 @@ public class RoomGenerator : MonoBehaviour
         }
 
         // สุ่ม rule ง่าย ๆ สองแบบ
-        //bool useCategoryRule = Random.value > 0;
+        GenerateCatagoryQuiz();
 
+    }
+
+    enum quizType
+    {
+        catagory,
+        weight,
+        custom
+    }
+
+    void GenerateCatagoryQuiz()
+    { 
         List<ItemData> mainGroup = null;
         ItemData oddItem = null;
 
@@ -97,6 +108,7 @@ public class RoomGenerator : MonoBehaviour
         }
 
         correctAnswer = oddItem;
+
         Debug.Log("คำตอบ: " + correctAnswer.itemName + " (แตกต่าง)");
     }
 
