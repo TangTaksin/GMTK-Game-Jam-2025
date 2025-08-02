@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30ed508790e538f44b3eefbaa4644ed3, type: 3}
-  m_Name: Watermelon
+  m_Name: Flower
   m_EditorClassIdentifier: 
-  itemName: WaterMelon
-  icon: {fileID: -488721925442295091, guid: 88a3ee3922ffdf24b92cc92cd4bab8e2, type: 3}
-  category: 0
-  weight: 1
+  itemName: Flower
+  icon: {fileID: -3694533877916086887, guid: 88a3ee3922ffdf24b92cc92cd4bab8e2, type: 3}
+  category: 3
+  weight: 0.5

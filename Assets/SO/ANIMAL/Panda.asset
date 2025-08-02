@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30ed508790e538f44b3eefbaa4644ed3, type: 3}
-  m_Name: Screwdriver
+  m_Name: Panda
   m_EditorClassIdentifier: 
-  itemName: Screwdriver
-  icon: {fileID: 7602395593292810342, guid: 4be9444cbc1109a4d8cc9432622e8aab, type: 3}
-  category: 1
-  weight: 0.5
+  itemName: Panda
+  icon: {fileID: -1929764202, guid: 88a3ee3922ffdf24b92cc92cd4bab8e2, type: 3}
+  category: 2
+  weight: 5

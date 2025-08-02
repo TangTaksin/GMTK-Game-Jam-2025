@@ -15,4 +15,4 @@ MonoBehaviour:
   itemName: Egg
   icon: {fileID: 1801263428120863714, guid: 88a3ee3922ffdf24b92cc92cd4bab8e2, type: 3}
   category: 0
-  weight: 0
+  weight: 1

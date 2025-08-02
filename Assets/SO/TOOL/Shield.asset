@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30ed508790e538f44b3eefbaa4644ed3, type: 3}
-  m_Name: Wrench
+  m_Name: Shield
   m_EditorClassIdentifier: 
-  itemName: Wrench
-  icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  itemName: Shield
+  icon: {fileID: -2064859774160998932, guid: 88a3ee3922ffdf24b92cc92cd4bab8e2, type: 3}
   category: 1
-  weight: 1.2
+  weight: 8

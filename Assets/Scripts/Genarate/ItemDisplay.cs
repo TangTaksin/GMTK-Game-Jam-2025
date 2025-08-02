@@ -18,7 +18,7 @@ public class ItemDisplay : MonoBehaviour
         cam = Camera.main;
 
         rb2d = GetComponent<Rigidbody2D>();
-        //spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         if (rb2d == null)
         {

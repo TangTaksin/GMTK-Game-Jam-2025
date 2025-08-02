@@ -312,6 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 257940a9c120d314a974824558a70858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomTraverseNeed: 0
   roomText: {fileID: 1048297901}
   gameClearScene: GameClearScene
 --- !u!4 &347049066
@@ -1098,13 +1099,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allItems:
-  - {fileID: 11400000, guid: a6ca6ca95e0b5da45805a588c6f21569, type: 2}
-  - {fileID: 11400000, guid: 4e613e70b3c845a4586d6088cbf34bb3, type: 2}
-  - {fileID: 11400000, guid: e0db8ae090de32a4198b0ebc967858c6, type: 2}
+  - {fileID: 11400000, guid: 66d930b84a7aa674f86bec4e4b60e6f8, type: 2}
   - {fileID: 11400000, guid: adbdd385206f3444f8bc49ea3459be4e, type: 2}
-  - {fileID: 11400000, guid: 133b3695657b3c94cb86ecaddf3440a5, type: 2}
   - {fileID: 11400000, guid: 139dd3f1d98f25f44af486c0991eec72, type: 2}
+  - {fileID: 11400000, guid: a6ca6ca95e0b5da45805a588c6f21569, type: 2}
+  - {fileID: 11400000, guid: 82baefbb6f9248c4f934a50fb2bc5a4e, type: 2}
+  - {fileID: 11400000, guid: 4e613e70b3c845a4586d6088cbf34bb3, type: 2}
+  - {fileID: 11400000, guid: 3b651b149c4fa5b4fa2903305e681868, type: 2}
   - {fileID: 11400000, guid: 7edd2990756154f4699d64298cf9e106, type: 2}
+  - {fileID: 11400000, guid: 45017c11132573a46958d911c4fe3bda, type: 2}
+  - {fileID: 11400000, guid: 36ecea6cb47e9964999264bad3ef5d55, type: 2}
+  - {fileID: 11400000, guid: e782b0aef55d08143b102f1c62225200, type: 2}
+  - {fileID: 11400000, guid: e83f38c1ce717034980dfd78dc08f965, type: 2}
+  - {fileID: 11400000, guid: 48834c7e5f1d7a847ba0379c2f6e02cc, type: 2}
+  - {fileID: 11400000, guid: bb5604ccfdb4dac47bc6948fdf62bb79, type: 2}
+  - {fileID: 11400000, guid: fbe8bbd472cd2e54ca8c671a42aa7dbc, type: 2}
+  - {fileID: 11400000, guid: e0db8ae090de32a4198b0ebc967858c6, type: 2}
+  - {fileID: 11400000, guid: 133b3695657b3c94cb86ecaddf3440a5, type: 2}
+  - {fileID: 11400000, guid: eff58f0799fcbf24b92473fe70ab454e, type: 2}
+  - {fileID: 11400000, guid: 6a660220b9bff80428a1503e333f1d36, type: 2}
+  - {fileID: 11400000, guid: de5016c23e6bda54dba0e94b1f8e3bea, type: 2}
   spawnPoints:
   - {fileID: 810555500}
   - {fileID: 279831549}
