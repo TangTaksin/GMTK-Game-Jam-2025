@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Apple
   m_EditorClassIdentifier: 
   itemName: 'Apple '
-  icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  icon: {fileID: 4703086342907267623, guid: 76ecf1076d2a7d44a86d8a71c9f59a72, type: 3}
   category: 0
   weight: 0.3
