@@ -1119,6 +1119,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eff58f0799fcbf24b92473fe70ab454e, type: 2}
   - {fileID: 11400000, guid: 6a660220b9bff80428a1503e333f1d36, type: 2}
   - {fileID: 11400000, guid: de5016c23e6bda54dba0e94b1f8e3bea, type: 2}
+  - {fileID: 11400000, guid: ab92b0db447c1f640b37af981c973b88, type: 2}
+  - {fileID: 11400000, guid: 2908a8b7958d52f469f81d9a1eb575b6, type: 2}
+  - {fileID: 11400000, guid: ef580865dd0a0d647b61434b550c8147, type: 2}
+  - {fileID: 11400000, guid: cf207d0c74f98344dbeb94edd0d89931, type: 2}
+  - {fileID: 11400000, guid: a96aac67eb2f3bc42ad3d1c758b830c1, type: 2}
   spawnPoints:
   - {fileID: 810555500}
   - {fileID: 279831549}
