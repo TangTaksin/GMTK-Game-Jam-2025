@@ -46,10 +46,12 @@ public class GameManager : MonoBehaviour
 
         if (isCorrect)
         {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.correct_answer_SFX);
             roomTraversed++;
         }
         else
         {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.wrong_answer_SFX);
             roomTraversed = 0;
         }
 

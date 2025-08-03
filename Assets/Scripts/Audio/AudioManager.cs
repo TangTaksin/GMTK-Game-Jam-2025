@@ -13,7 +13,9 @@ public class AudioManager : MonoBehaviour
     public AudioClip ambientClip;
 
     [Header("Sound Effects")]
-    public AudioClip generalSFX;
+    public AudioClip pickUp_SFX;
+    public AudioClip correct_answer_SFX;
+    public AudioClip wrong_answer_SFX;
     public AudioClip[] walkingClips;
 
     [Header("Step Timing Settings")]

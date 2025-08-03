@@ -49,13 +49,22 @@ public class ItemDisplay : MonoBehaviour
 
             // (ถ้าต้องการปรับ linear drag ด้วย ก็ใช้ rb2d.drag = ... ได้)
 
-            var x = Random.Range(-1f, 1f);
-            var angle = new Vector2(x, 1);
-            var mag = Random.Range(2.5f, 5f);
-            var rot = Random.Range(-5f, 5f);
+            // สุ่มเล็กน้อยทางซ้าย/ขวา แต่เน้นขึ้นเป็นหลัก
+            Vector2 direction = new Vector2(Random.Range(-1f, 1f), 1f).normalized;
 
-            rb2d.AddForce(angle * mag, ForceMode2D.Impulse);
-            rb2d.AddTorque(rot, ForceMode2D.Impulse);
+            // สุ่มแรงที่ใช้พุ่งขึ้น
+            float forceMagnitude = Random.Range(4f, 8f); // ปรับให้แรงขึ้นกว่าเดิม
+
+            // สุ่มทอร์กเพื่อให้หมุน
+            float torque = Random.Range(-10f, 10f); // เพิ่ม torque ถ้าต้องการหมุนแรงขึ้น
+
+            // เพิ่มแรงดันในทิศทางขึ้น
+            rb2d.AddForce(direction * forceMagnitude, ForceMode2D.Impulse);
+
+            // เพิ่มแรงหมุน
+            rb2d.AddTorque(torque, ForceMode2D.Impulse);
+
+
         }
     }
 
@@ -69,6 +78,7 @@ public class ItemDisplay : MonoBehaviour
     {
         cursor = cam.ScreenToWorldPoint(Input.mousePosition);
         cursor_offset = transform.position - cursor;
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.pickUp_SFX);
     }
 
     private void OnMouseDrag()

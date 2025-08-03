@@ -60,16 +60,24 @@ public class SettingsManager : MonoBehaviour
 
     public void LoadVolume()
     {
-        SetSliderValue(musicSlider, "musicVolume", "Music");
-        SetSliderValue(ambientSlider, "ambientVolume", "Ambient");
-        SetSliderValue(sfxSlider, "sfxVolume", "SFX");
+        float musicValue = PlayerPrefs.GetFloat("musicVolume", 0.5f);
+        musicSlider.value = musicValue;
+        SetMusicVolume();
+
+        float ambientValue = PlayerPrefs.GetFloat("ambientVolume", 0.5f);
+        ambientSlider.value = ambientValue;
+        SetAmbientVolume();
+
+        float sfxValue = PlayerPrefs.GetFloat("sfxVolume", 0.5f);
+        sfxSlider.value = sfxValue;
+        SetSFXVolume();
     }
 
     private void SetSliderValue(Slider slider, string key, string exposedParam)
     {
         if (audioMixer == null || slider == null) return;
 
-        float value = PlayerPrefs.GetFloat(key, 1f);
+        float value = PlayerPrefs.GetFloat(key, .5f);
         slider.value = value;
         audioMixer.SetFloat(exposedParam, Mathf.Log10(value) * 20f);
     }
