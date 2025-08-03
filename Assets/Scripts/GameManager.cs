@@ -6,9 +6,9 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     int roomTraversed = 0;
-    public int roomTraverseNeed;
+    public int roomTraversedNeeded;
     [Space]
-    public TextMeshProUGUI roomText;
+    public TextMeshPro roomText;
 
     public delegate void GameEvent();
     public static GameEvent StartEvent;
@@ -18,13 +18,13 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {        
-        RoomGenerator.AnswerEvent += NextRoom;
+        RoomGenerator.AnswerEvent += TransitionToNextRoom;
 
     }
 
     private void OnDisable()
     {
-        RoomGenerator.AnswerEvent -= NextRoom;
+        RoomGenerator.AnswerEvent -= TransitionToNextRoom;
     }
 
     private void Start()
@@ -40,11 +40,21 @@ public class GameManager : MonoBehaviour
         UpdateText();
     }
 
-    public void NextRoom(bool isCorrect)
-    {
-        
+    bool corrected;
 
-        if (isCorrect)
+    void TransitionToNextRoom(bool isCorrect)
+    {
+        Transition.CalledFadeIn?.Invoke();
+        Transition.FadeInOver += NextRoom;
+
+        corrected = isCorrect;
+    }
+
+    public void NextRoom()
+    {
+        Transition.FadeInOver -= NextRoom;
+
+        if (corrected)
         {
             roomTraversed++;
         }
@@ -53,9 +63,10 @@ public class GameManager : MonoBehaviour
             roomTraversed = 0;
         }
 
-        if (roomTraversed >= roomTraverseNeed)
+        if (roomTraversed >= roomTraversedNeeded)
         {
             SceneManager.LoadScene(gameClearScene);
+            return;
         }
 
         NextRoomEvent?.Invoke(); 
@@ -64,6 +75,7 @@ public class GameManager : MonoBehaviour
 
     private void UpdateText()
     {
+        if (roomText)
         roomText.text = roomTraversed.ToString();
     }
 }

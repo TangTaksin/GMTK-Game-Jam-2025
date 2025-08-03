@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4959552964295681659}
   - component: {fileID: 1464190052827964473}
   - component: {fileID: 7234730112738186605}
-  - component: {fileID: 6148316526078170846}
   m_Layer: 0
   m_Name: ItemPrefab
   m_TagString: Untagged
@@ -78,16 +77,21 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_SortingOrder: 2
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+<<<<<<< Updated upstream
   m_DrawMode: 2
   m_Size: {x: 1, y: 1}
+=======
+  m_DrawMode: 0
+  m_Size: {x: 2, y: 2}
+>>>>>>> Stashed changes
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &1464190052827964473
@@ -130,6 +134,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+<<<<<<< Updated upstream
 --- !u!61 &6148316526078170846
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -176,3 +181,5 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+=======
+>>>>>>> Stashed changes
