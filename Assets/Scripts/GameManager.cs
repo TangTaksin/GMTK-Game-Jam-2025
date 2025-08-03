@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     int roomTraversed = 0;
     public int roomTraversedNeeded;
     [Space]
-    public TextMeshPro roomText;
+    public TextMeshProUGUI roomText;
 
     public delegate void GameEvent();
     public static GameEvent StartEvent;
