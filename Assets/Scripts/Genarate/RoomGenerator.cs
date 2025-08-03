@@ -1,41 +1,61 @@
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
 
 public class RoomGenerator : MonoBehaviour
 {
- [Header("ไอเทมทั้งหมดในเกม")]
+    #region Fields
+
+    [Header("ไอเทมทั้งหมดในเกม")]
     public List<ItemData> allItems;
 
     [Header("ตำแหน่งวางไอเทม 4 จุด")]
-    public Transform[] spawnPoints;  // ต้องมี 4 จุด
+    public Transform[] spawnPoints;
 
     [Header("Prefab ไอเทม")]
     public GameObject itemPrefab;
 
     private ItemData correctAnswer;
 
-    public delegate void RoomEvent(bool _bool);
+    private enum QuizType
+    {
+        Category,
+        Special
+    }
+
+    #endregion
+
+    #region Events
+
+    public delegate void RoomEvent(bool success);
     public static RoomEvent RoomGeneratedEvent;
     public static RoomEvent AnswerEvent;
+
+    #endregion
+
+    #region Unity Methods
 
     private void OnEnable()
     {
         GameManager.StartEvent += GenerateRoom;
         GameManager.NextRoomEvent += GenerateRoom;
-        AnswerBox.AddEvent += checkAnswer;
+        AnswerBox.AddEvent += CheckAnswer;
     }
 
     private void OnDisable()
     {
         GameManager.StartEvent -= GenerateRoom;
         GameManager.NextRoomEvent -= GenerateRoom;
-        AnswerBox.AddEvent -= checkAnswer;
+        AnswerBox.AddEvent -= CheckAnswer;
     }
+
+    #endregion
+
+    #region Core Logic
 
     public void GenerateRoom()
     {
-        print("generating");
+        Debug.Log("Generating Room...");
 
         if (spawnPoints.Length < 4)
         {
@@ -43,86 +63,112 @@ public class RoomGenerator : MonoBehaviour
             return;
         }
 
-        // ล้างไอเทมเก่าในห้อง
+        ClearPreviousItems();
+
+        QuizType quizType = (QuizType)Random.Range(0, 2);
+
+        switch (quizType)
+        {
+            case QuizType.Category:
+                GenerateCategoryQuiz();
+                break;
+            case QuizType.Special:
+                GenerateSpecialQuiz();
+                break;
+        }
+    }
+
+    private void ClearPreviousItems()
+    {
         foreach (var point in spawnPoints)
         {
             foreach (Transform child in point)
+            {
                 Destroy(child.gameObject);
+            }
         }
-
-        // สุ่ม rule ง่าย ๆ สองแบบ
-        GenerateCatagoryQuiz();
-
     }
 
-    enum quizType
+    private void GenerateCategoryQuiz()
     {
-        catagory,
-        weight,
-        custom
+        var validGroups = allItems
+            .GroupBy(i => i.category)
+            .Where(g => g.Count() >= 3)
+            .ToList();
+
+        if (validGroups.Count == 0)
+        {
+            Debug.LogWarning("ไม่มีกลุ่ม category ที่มีไอเทม >= 3 ชิ้น");
+            return;
+        }
+
+        var selectedGroup = validGroups[Random.Range(0, validGroups.Count)];
+        var mainGroup = selectedGroup.OrderBy(_ => Random.value).Take(3).ToList();
+        var oddCandidates = allItems.Where(i => i.category != selectedGroup.Key).ToList();
+
+        if (oddCandidates.Count == 0)
+        {
+            Debug.LogWarning("ไม่พบไอเทมที่แตกต่างใน category");
+            return;
+        }
+
+        var oddItem = oddCandidates[Random.Range(0, oddCandidates.Count)];
+        CreateQuiz(mainGroup, oddItem, $"category: {selectedGroup.Key}");
     }
 
-    void GenerateCatagoryQuiz()
-    { 
-        List<ItemData> mainGroup = null;
-        ItemData oddItem = null;
+    private void GenerateSpecialQuiz()
+    {
+        var specials = allItems.Where(i => i.special).ToList();
+        var nonSpecials = allItems.Where(i => !i.special).ToList();
 
-        // หากลุ่มไอเทมที่มี category เดียวกันอย่างน้อย 3 ชิ้น
-        var groups = allItems.GroupBy(i => i.category)
-                                .Where(g => g.Count() >= 3)
-                                .ToList();
-
-        if (groups.Count == 0)
+        if (specials.Count >= 3 && nonSpecials.Count >= 1)
         {
-            Debug.LogError("ไม่มีกลุ่ม category ที่มีไอเทม >=3 ชิ้น");
-            return;
+            var mainGroup = specials.OrderBy(_ => Random.value).Take(3).ToList();
+            var oddItem = nonSpecials[Random.Range(0, nonSpecials.Count)];
+            CreateQuiz(mainGroup, oddItem, "special: TRUE");
         }
-
-        var selectedGroup = groups[Random.Range(0, groups.Count)];
-        mainGroup = selectedGroup.OrderBy(x => Random.value).Take(3).ToList();
-
-        // หาไอเทมที่ category แตกต่าง (odd one out)
-        var oddGroup = allItems.Where(i => i.category != selectedGroup.Key).ToList();
-
-        if (oddGroup.Count == 0)
+        else if (nonSpecials.Count >= 3 && specials.Count >= 1)
         {
-            Debug.LogError("ไม่พบไอเทมที่แตกต่างใน category");
-            return;
+            var mainGroup = nonSpecials.OrderBy(_ => Random.value).Take(3).ToList();
+            var oddItem = specials[Random.Range(0, specials.Count)];
+            CreateQuiz(mainGroup, oddItem, "special: FALSE");
         }
+        else
+        {
+            Debug.LogWarning("ไม่สามารถสร้างคำถามแบบ special ได้ — fallback ไป category");
+            GenerateCategoryQuiz();
+        }
+    }
 
-        oddItem = oddGroup[Random.Range(0, oddGroup.Count)];
-
+    private void CreateQuiz(List<ItemData> groupItems, ItemData oddItem, string debugInfo)
+    {
+        correctAnswer = oddItem;
         RoomGeneratedEvent?.Invoke(true);
 
-        // รวมไอเทม 4 ชิ้น แล้วสลับตำแหน่งสุ่ม
-        List<ItemData> itemsToSpawn = new List<ItemData>(mainGroup) { oddItem };
-        itemsToSpawn = itemsToSpawn.OrderBy(x => Random.value).ToList();
+        var itemsToSpawn = new List<ItemData>(groupItems) { oddItem };
+        itemsToSpawn = itemsToSpawn.OrderBy(_ => Random.value).ToList();
 
-        // สร้างในตำแหน่ง spawnPoints
         for (int i = 0; i < 4; i++)
         {
-            GameObject obj = Instantiate(itemPrefab, spawnPoints[i].position, Quaternion.identity, spawnPoints[i]);
+            var spawnPoint = spawnPoints[i];
+            var obj = Instantiate(itemPrefab, spawnPoint.position, Quaternion.identity, spawnPoint);
+
             var display = obj.GetComponent<ItemDisplay>();
             if (display != null)
+            {
                 display.Setup(itemsToSpawn[i]);
+            }
         }
 
-        correctAnswer = oddItem;
-
-        Debug.Log("คำตอบ: " + correctAnswer.itemName + " (แตกต่าง)");
+        Debug.Log($"คำตอบ: {correctAnswer.itemName} (แตกต่าง - {debugInfo})");
     }
 
-    public void checkAnswer(AnswerBox box)
+    public void CheckAnswer(AnswerBox box)
     {
-        var answer = box.ReadObjects().GetData();
-
-        bool isCorrect = false;
-
-        if (answer == correctAnswer)
-        {
-            isCorrect = true;
-        }
-
+        var submittedItem = box.ReadObjects().GetData();
+        bool isCorrect = submittedItem == correctAnswer || submittedItem.Equals(correctAnswer);
         AnswerEvent?.Invoke(isCorrect);
     }
+
+    #endregion
 }
