@@ -5,8 +5,16 @@ public class SceneLoader : MonoBehaviour
 {
     public string sceneName;
 
-    public void LoadScene()
+
+    public void CallTransition()
     {
+        Transition.CalledFadeIn?.Invoke();
+        Transition.FadeInOver += LoadScene;
+    }
+
+    void LoadScene()
+    {
+        Transition.FadeInOver -= LoadScene;
         SceneManager.LoadScene(sceneName);
     }
 }

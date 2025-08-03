@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemDisplay : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb2d;
+    PolygonCollider2D polygon2d;
 
     Camera cam;
     AnswerBox answerBox;
@@ -12,6 +14,8 @@ public class ItemDisplay : MonoBehaviour
     Vector3 cursor;
 
     ItemData itemData;
+
+    private readonly List<Vector2> m_PhysicsShapePath = new();
 
     private void Awake()
     {
@@ -32,6 +36,8 @@ public class ItemDisplay : MonoBehaviour
 
         if (spriteRenderer != null)
             spriteRenderer.sprite = item.icon;
+
+        polygon2d = gameObject.AddComponent<PolygonCollider2D>();
 
         gameObject.name = item.itemName;
 
