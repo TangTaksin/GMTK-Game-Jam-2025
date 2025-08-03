@@ -125,9 +125,11 @@ public class ItemDisplay : MonoBehaviour
     {
         if (answerBox)
         {
+
             answerBox.Add(this);
 
             gameObject.SetActive(false);
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.drop_item_SFX);
         }
     }
 

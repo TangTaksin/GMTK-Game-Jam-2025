@@ -16,6 +16,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip pickUp_SFX;
     public AudioClip correct_answer_SFX;
     public AudioClip wrong_answer_SFX;
+    public AudioClip drop_item_SFX;
+
     public AudioClip[] walkingClips;
 
     [Header("Step Timing Settings")]
